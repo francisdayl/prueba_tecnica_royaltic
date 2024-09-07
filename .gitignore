@@ -132,3 +132,4 @@ dist
 venv/
 .vscode/
 mysql_data/
+__pycache__/
