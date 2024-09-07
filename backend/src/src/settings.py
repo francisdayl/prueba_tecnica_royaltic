@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,9 +38,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'corsheaders'
+    "corsheaders",
     "rest_framework",
-    "store"
+    "coreapi",
+    "store",
 ]
 
 MIDDLEWARE = [
@@ -78,16 +80,16 @@ WSGI_APPLICATION = "src.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    "default": {
         "ENGINE": "django.db.backends.mysql",
-        'NAME': os.getenv('DB_NAME', 'mysql'),  # 'mydb' is default
-        'USER': os.getenv('DB_USER', 'admin'),  # 'myuser' is default
-        'PASSWORD': os.getenv('DB_PASSWORD', 'admin'),  # 'mypassword' is default
-        'HOST': os.getenv('DB_HOST', 'localhost'),  # 'localhost' is the MySQL service name in docker-compose
-        'PORT': os.getenv('DB_PORT', '3306'),  # default MySQL port
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-        }
+        "NAME": os.getenv("DB_NAME", "mysql"),  # 'mydb' is default
+        "USER": os.getenv("DB_USER", "admin"),  # 'myuser' is default
+        "PASSWORD": os.getenv("DB_PASSWORD", "admin"),  # 'mypassword' is default
+        "HOST": os.getenv(
+            "DB_HOST", "localhost"
+        ),  # 'localhost' is the MySQL service name in docker-compose
+        "PORT": os.getenv("DB_PORT", "3306"),  # default MySQL port
+        "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},
     }
 }
 
@@ -133,4 +135,8 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ORIGIN_WHITELIST = ['http://localhost:4200']
+CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
