@@ -9,5 +9,6 @@ router.register(r"product", views.ProductView, "product")
 
 urlpatterns = [
     path("store/", include(router.urls)),
+    path(route="store/seed", view=views.seed, name="seed"),
     path("docs/", include_docs_urls(title="Store API")),
 ]
