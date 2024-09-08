@@ -21,12 +21,22 @@ class ProductView(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get"])
     def related_products(self, request, pk=None):
-        # Custom logic here, e.g., filtering categories
-        product: Product = Product.objects.get(pk=pk)
-        print(product.category.all())
-        serializer = self.get_serializer(product)
+        product: Product = Product.objects.get(id=pk)
+        product_categories = product.category.all()
+        common_category_products = (
+            Product.objects.filter(category__in=product_categories)
+            .exclude(id=product.id)
+            .distinct()
+        )
+        serializer = self.get_serializer(common_category_products, many=True)
+        response_data = serializer.data
+        for instance in response_data:
+            instance["categories"] = CategorySerializer(
+                common_category_products.get(id=instance["id"]).category.all(),
+                many=True,
+            ).data
 
-        return Response(serializer.data)
+        return Response(response_data[:5])
 
 
 @action(detail=False, methods=["get"])
