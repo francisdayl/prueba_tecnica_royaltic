@@ -1,1 +1,23 @@
-<p>admin works!</p>
+<section class="container d-flex flex-row h-100 m-0 p-0 w-100 ">
+    <div class="col-2 col-xs-0 text-white h-100 bg-dark" style="background-color:rgb(138, 138, 138);">
+        <h2 class="text-center bg-gray" style="background-color:rgb(138, 138, 138);">Admin</h2>
+        <ul>
+            <li>
+                <a class="button"
+                routerLink="product"
+                routerLinkActive="activebutton"
+                ariaCurrentWhenActive="page">Product</a>
+            </li>
+            <li>
+                <a class="button"
+                routerLink="category"
+                routerLinkActive="activebutton"
+                ariaCurrentWhenActive="page">Category</a>
+            </li>
+        </ul>
+    </div>
+    <div>
+        content
+        <router-outlet></router-outlet>
+    </div>
+</section>

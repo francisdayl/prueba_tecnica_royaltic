@@ -18,7 +18,6 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ data }) => {
-      console.log(data)
       this.selectedProduct = data.product;
       this.relatedProducts = data.related_products;
     })

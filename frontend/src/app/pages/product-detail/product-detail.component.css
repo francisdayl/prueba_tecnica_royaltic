@@ -3,3 +3,11 @@
     width: 800px;
     flex: 1 0 50%;
 }
+
+@media (max-width: 680px) {
+    .related-products-container app-product-card{
+        min-width: 100px;
+        width: 800px;
+        flex: 1 0 100%;
+    }
+  }

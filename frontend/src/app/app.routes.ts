@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { ResolveFn, Routes } from '@angular/router';
 import { AdminComponent } from './pages/admin/admin.component';
 import { IndexComponent } from './pages/index/index.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -10,13 +10,24 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { indexResolver } from './resolvers/index.resolver';
 import { productDetailResolver } from './resolvers/product-detail.resolver';
 
+const resolvedAdminProduct: ResolveFn<string> = () => Promise.resolve('product');
+
+
 export const routes: Routes = [
     { path: '',      component: IndexComponent, resolve: { data: indexResolver } },
-    { path: 'admin',      component: AdminComponent },
+    { path: 'admin',   component: AdminComponent,  children: [
+        {
+          path: 'product',
+          title: resolvedAdminProduct,
+          component: AdminProductComponent, 
+        },
+        {
+          path: 'category',
+          component: AdminCategoryComponent, 
+        },
+      ], },
     { path: 'admin-category/id',      component: AdminCategoryDetailComponent },
     { path: 'admin-product/id',      component: AdminProductDetailComponent },
-    { path: 'admin-category',      component: AdminCategoryComponent },
-    { path: 'admin-product',      component: AdminProductComponent },
     { path: 'product',      component: AdminProductComponent },
     { path: 'product/:id',      component: ProductDetailComponent,  resolve: { data: productDetailResolver } },
     { path: '**',      component: NotFoundComponent }
