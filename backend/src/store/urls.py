@@ -9,5 +9,5 @@ router.register(r"product", views.ProductView, "product")
 
 urlpatterns = [
     path("store/", include(router.urls)),
-    path("docs/", include_docs_urls(title="Tasks API")),
+    path("docs/", include_docs_urls(title="Store API")),
 ]
