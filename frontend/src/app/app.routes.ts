@@ -7,9 +7,10 @@ import { AdminProductDetailComponent } from './pages/admin-product-detail/admin-
 import { AdminCategoryComponent } from './pages/admin-category/admin-category.component';
 import { AdminProductComponent } from './pages/admin-product/admin-product.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { indexResolver } from './resolvers/index.resolver';
 
 export const routes: Routes = [
-    { path: '',      component: IndexComponent },
+    { path: '',      component: IndexComponent, resolve: { data: indexResolver } },
     { path: 'admin',      component: AdminComponent },
     { path: 'admin-category/id',      component: AdminCategoryDetailComponent },
     { path: 'admin-product/id',      component: AdminProductDetailComponent },

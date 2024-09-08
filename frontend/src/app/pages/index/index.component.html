@@ -1,1 +1,56 @@
-<p>index works!</p>
+<section class="w-75 mx-auto mt-4">
+    <h2 class="text-center">Productos</h2>
+    <hr>
+    <div class="container mt-4">
+        <div class="d-flex flex-row gap-4 justify-content-end mb-3">
+            <div class="d-inline-block">
+            <mat-form-field>
+                <mat-label>Categories</mat-label>
+                <mat-select [formControl]="selectedCategory" multiple>
+                  <mat-select-trigger>
+                    @if(selectedCategory.value){
+                    <ng-container>
+                        {{ formattedCategories }}
+                      </ng-container>
+                    }
+                    @if (selectedCategory.value) {
+                      <span class="example-additional-selection">
+                        (+{{(selectedCategory.value.length|| 0) - 1}} {{selectedCategory.value.length === 2 ? 'other' : 'others'}})
+                      </span>
+                    }
+                  </mat-select-trigger>
+                  @for (category of categoryList; track category) {
+                <mat-option [value]="category">{{category.name}}</mat-option>
+              }
+                </mat-select>
+              </mat-form-field>
+          </div>
+          <div class="d-inline-block">
+            <mat-form-field>
+              <mat-label>Ordenar</mat-label>
+              <mat-select [formControl]="selectedSortCriteria">
+                <mat-option [value]="'0'">Ninguno</mat-option>
+                <mat-option [value]="'1'">Alfabético ascendente A-Z</mat-option>
+                <mat-option [value]="'2'">Alfabético descendete Z-A</mat-option>
+                <mat-option [value]="'3'">Más baratos primero</mat-option>
+                <mat-option [value]="'4'">Más caros primero</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      
+        <div class="row gap-4 justify-content-between">
+        @for (product of filteredProducts; track product) {
+            <div class="card mb-4 col-lg-3 col-md-4 col-sm-5 col-xs-8 hover:bg-gray" (click)="navigateTo(product.id)" style="cursor: pointer; &:hover{background-color: rgb(182, 182, 182);}">
+                <img src="data:image/png;base64,{{ product.image }}" class="card-img-top mt-3" alt="{{ product.name }}" width="200" height="300">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  <p class="card-text"><strong>Price:</strong> {{ product.price }}</p>
+                </div>
+            </div>
+        }
+        </div>
+      </div>
+      
+</section>

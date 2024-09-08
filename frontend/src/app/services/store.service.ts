@@ -1,38 +1,59 @@
 import { Injectable, inject  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category } from '../interfaces/store';
+import { Category, Product } from '../interfaces/store';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
-  private http = inject(HttpClient);
   private apiUrl:string = "http://localhost:8000/" + "store";
+  private apiUrlCategory:string = this.apiUrl + "/category/";
+  private apiUrlProduct:string = this.apiUrl + "/product/";
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
-  getCategories(){
-    return this.http.get<Category[]>(`${this.apiUrl}/category/`);
+  getCategories():Observable<Category[]>{
+    return this.http.get<Category[]>(this.apiUrlCategory);
   }
 
   getCategory(id:number){
-    return this.http.get<Category>(`${this.apiUrl}"/category/${id}`);
+    return this.http.get<Category>(`${this.apiUrlCategory}${id}`);
   }
 
   createCategory(category: Category){
-    return this.http.post<Category>(`${this.apiUrl}"/category/`,category);
+    return this.http.post<Category>(this.apiUrlCategory,category);
   }
 
   updateCategory(category: Category){
-    return this.http.put<Category>(`${this.apiUrl}"/category/${category.id}/`,category);
+    return this.http.put<Category>(`${this.apiUrlCategory}${category.id}/`,category);
   }
 
   deleteCategory(category: Category){
-    return this.http.delete<Category>(`${this.apiUrl}"/category/${category.id}/`);
+    return this.http.delete<Category>(`${this.apiUrlCategory}${category.id}/`);
   }
 
 
+  getProducts():Observable<Product[]>{
+    return this.http.get<Product[]>(this.apiUrlProduct);
+  }
+
+  getProduct(id:number){
+    return this.http.get<Product>(`${this.apiUrlProduct}${id}`);
+  }
+
+  createProduct(category: Product){
+    return this.http.post<Product>(this.apiUrlProduct,category);
+  }
+
+  updateProduct(product: Product){
+    return this.http.put<Product>(`${this.apiUrlProduct}${product.id}/`,product);
+  }
+
+  deleteProduct(product: Product){
+    return this.http.delete<Product>(`${this.apiUrlProduct}${product.id}/`);
+  }
 
 
 
