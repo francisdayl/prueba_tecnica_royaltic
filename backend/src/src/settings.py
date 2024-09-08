@@ -82,11 +82,11 @@ WSGI_APPLICATION = "src.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": os.getenv("DB_NAME", "mysql"),  # 'mydb' is default
+        "NAME": os.getenv("DB_NAME", "mydb"),  # 'mydb' is default
         "USER": os.getenv("DB_USER", "admin"),  # 'myuser' is default
         "PASSWORD": os.getenv("DB_PASSWORD", "admin"),  # 'mypassword' is default
         "HOST": os.getenv(
-            "DB_HOST", "localhost"
+            "DB_HOST", "host.docker.internal"
         ),  # 'localhost' is the MySQL service name in docker-compose
         "PORT": os.getenv("DB_PORT", "3306"),  # default MySQL port
         "OPTIONS": {"init_command": "SET sql_mode='STRICT_TRANS_TABLES'"},

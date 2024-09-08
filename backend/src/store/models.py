@@ -20,7 +20,7 @@ class Product(models.Model):
     name = models.CharField(
         null=False, blank=False, max_length=30, verbose_name="Product Name"
     )
-    image = models.ImageField(verbose_name="Product Image")
+    image = models.TextField(null=True, verbose_name="Product Image")
     description = models.TextField(
         null=False, blank=False, verbose_name="Product Description"
     )

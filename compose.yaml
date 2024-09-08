@@ -29,24 +29,21 @@ services:
       - "8000:8000"
     volumes:
       - ./backend/src:/app
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py makemigrations store && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
     depends_on:
       - db
-    environment:
-      - DB_HOST=localhost
-      - DB_PORT=3306
-      - DB_NAME=mysql
-      - DB_USER=admin
-      - DB_PASSWORD=admin
+    env_file:
+      - .env
   db:
     container_name: database_container
-    image: mysql:8.0.39-bookworm
+    build:
+      context: ./db
     ports:
       - "3306:3306"
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=admin
-      - MYSQL_DATABASE=mysql
+      - MYSQL_DATABASE=mydb
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=admin
     volumes:
@@ -57,6 +54,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 30s
+    networks:
+      - mynetwork
   
   
 
