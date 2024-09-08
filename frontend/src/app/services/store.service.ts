@@ -1,6 +1,6 @@
 import { Injectable, inject  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Category, Product } from '../interfaces/store';
+import { Category, Product, ProductFull } from '../interfaces/store';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -43,6 +43,10 @@ export class StoreService {
     return this.http.get<Product>(`${this.apiUrlProduct}${id}`);
   }
 
+  getProductFull(id:number):Observable<ProductFull>{
+    return this.http.get<ProductFull>(`${this.apiUrlProduct}${id}/full`);
+  }
+
   createProduct(category: Product){
     return this.http.post<Product>(this.apiUrlProduct,category);
   }
@@ -55,6 +59,10 @@ export class StoreService {
     return this.http.delete<Product>(`${this.apiUrlProduct}${product.id}/`);
   }
 
+
+  getRelatedProducts(id:number):Observable<ProductFull[]>{
+    return this.http.get<ProductFull[]>(`${this.apiUrlProduct}${id}/related_products/`);
+  }
 
 
 }

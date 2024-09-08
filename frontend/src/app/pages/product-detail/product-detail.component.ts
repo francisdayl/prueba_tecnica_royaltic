@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Product, ProductFull } from '../../interfaces/store';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [],
+  imports: [ProductCardComponent],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css'
 })
-export class ProductDetailComponent {
+export class ProductDetailComponent implements OnInit {
+  
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  public selectedProduct: ProductFull | undefined;
+  public relatedProducts:ProductFull[] = [];
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe(({ data }) => {
+      console.log(data)
+      this.selectedProduct = data.product;
+      this.relatedProducts = data.related_products;
+    })
+  }
+
 
 }

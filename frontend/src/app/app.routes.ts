@@ -8,6 +8,7 @@ import { AdminCategoryComponent } from './pages/admin-category/admin-category.co
 import { AdminProductComponent } from './pages/admin-product/admin-product.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { indexResolver } from './resolvers/index.resolver';
+import { productDetailResolver } from './resolvers/product-detail.resolver';
 
 export const routes: Routes = [
     { path: '',      component: IndexComponent, resolve: { data: indexResolver } },
@@ -17,7 +18,7 @@ export const routes: Routes = [
     { path: 'admin-category',      component: AdminCategoryComponent },
     { path: 'admin-product',      component: AdminProductComponent },
     { path: 'product',      component: AdminProductComponent },
-    { path: 'product/:id',      component: ProductDetailComponent },
+    { path: 'product/:id',      component: ProductDetailComponent,  resolve: { data: productDetailResolver } },
     { path: '**',      component: NotFoundComponent }
 
 ];

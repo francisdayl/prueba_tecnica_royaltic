@@ -7,10 +7,10 @@ import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 
 export const indexResolver: ResolveFn<{ categories: Category[], products: Product[]} > = (route, state) => {
-  const storeService = inject(StoreService); // Access route params
+  const storeService = inject(StoreService); 
   return forkJoin({
-    categories: storeService.getCategories(), // Observable<Category[]>
-    products: storeService.getProducts()      // Observable<Product[]>
+    categories: storeService.getCategories(), 
+    products: storeService.getProducts()      
   }).pipe(
     map((data: { categories: Category[], products: Product[]}) => ({
       categories: data.categories,

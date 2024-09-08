@@ -20,6 +20,17 @@ class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
 
     @action(detail=True, methods=["get"])
+    def full(self, request, pk=None):
+        product: Product = Product.objects.get(id=pk)
+        serializer = self.get_serializer(product, many=False)
+        response_data = serializer.data
+        response_data["category"] = CategorySerializer(
+            product.category.all(),
+            many=True,
+        ).data
+        return Response(response_data)
+
+    @action(detail=True, methods=["get"])
     def related_products(self, request, pk=None):
         product: Product = Product.objects.get(id=pk)
         product_categories = product.category.all()

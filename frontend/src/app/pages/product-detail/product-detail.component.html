@@ -1,1 +1,9 @@
-<p>product-detail works!</p>
+<h2 class="text-center mt-3">Tech Store Product</h2>
+<app-product-card [product]="selectedProduct!" [width]="200" [height]="400"></app-product-card>
+<h3 class="text-center">Related Products</h3>
+
+<div class="d-flex flex-row related-products-container w-75 mx-auto overflow-x-scroll py-4 mb-4" id="related-products">
+    @for(relatedProduct of relatedProducts; track relatedProduct){
+        <app-product-card [product]="selectedProduct!" [width]="500" [height]="300"></app-product-card>
+    }
+</div>
