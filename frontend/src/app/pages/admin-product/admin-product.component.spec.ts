@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { 404Component } from './404.component';
+import { AdminProductComponent } from './admin-product.component';
 
-describe('404Component', () => {
-  let component: 404Component;
-  let fixture: ComponentFixture<404Component>;
+describe('AdminProductComponent', () => {
+  let component: AdminProductComponent;
+  let fixture: ComponentFixture<AdminProductComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [404Component]
+      imports: [AdminProductComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(404Component);
+    fixture = TestBed.createComponent(AdminProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
