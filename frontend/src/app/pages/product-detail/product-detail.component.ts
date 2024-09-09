@@ -23,5 +23,10 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
+  navigateTo(id:number){
+    console.log(id)
+    this.router.navigate([`product/${id}`]);
+  }
+
 
 }

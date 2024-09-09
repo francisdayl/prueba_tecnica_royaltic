@@ -30,8 +30,8 @@ export class StoreService {
     return this.http.put<Category>(`${this.apiUrlCategory}${category.id}/`,category);
   }
 
-  deleteCategory(category: Category){
-    return this.http.delete<Category>(`${this.apiUrlCategory}${category.id}/`);
+  deleteCategory(categoryId: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrlCategory}${categoryId}/`);
   }
 
 
@@ -44,7 +44,11 @@ export class StoreService {
   }
 
   getProductFull(id:number):Observable<ProductFull>{
-    return this.http.get<ProductFull>(`${this.apiUrlProduct}${id}/full`);
+    return this.http.get<ProductFull>(`${this.apiUrlProduct}${id}/full_instance`);
+  }
+
+  getProductsFull():Observable<ProductFull[]>{
+    return this.http.get<ProductFull[]>(`${this.apiUrlProduct}full`);
   }
 
   createProduct(category: Product){
@@ -55,8 +59,8 @@ export class StoreService {
     return this.http.put<Product>(`${this.apiUrlProduct}${product.id}/`,product);
   }
 
-  deleteProduct(product: Product){
-    return this.http.delete<Product>(`${this.apiUrlProduct}${product.id}/`);
+  deleteProduct(productId: number): Observable<void>{
+    return this.http.delete<void>(`${this.apiUrlProduct}${productId}/`);
   }
 
 

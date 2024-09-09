@@ -93,7 +93,7 @@ export class IndexComponent implements OnInit {
   }
 
   navigateTo(id:number){
-    this.router.navigate([`/product/${id}`]);
+    this.router.navigate([`product/${id}`]);
   }
 
 }

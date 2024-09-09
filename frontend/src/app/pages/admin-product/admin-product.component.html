@@ -1,1 +1,55 @@
-<p>admin-product works!</p>
+<div class="demo-button-container">
+    <a mat-raised-button routerLink="create"
+    routerLinkActive="activebutton"
+    ariaCurrentWhenActive="page" class="demo-button">
+      Add Product
+    </a>
+  </div>
+  
+  <div class="w-100">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table w-100">
+      <!-- Position Column -->
+      <ng-container matColumnDef="name">
+        <th  mat-header-cell *matHeaderCellDef class="text-center">Name</th>
+        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Description</th>
+        <td mat-cell *matCellDef="let element">{{element.description}}</td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Price</th>
+        <td mat-cell *matCellDef="let element">{{element.price}}</td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="categories">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Categories</th>
+        <td mat-cell *matCellDef="let element">
+          @for(category of element.category; track category){
+            <button class="btn btn-primary disabled text-xs" style="margin-left: 4px;">{{category.name}}</button>
+          }
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="text-center">Actions </th>
+        <td mat-cell *matCellDef="let element" class="">
+          <a  class="btn btn-primary" routerLink="{{element.id}}"
+          routerLinkActive="activebutton"
+          ariaCurrentWhenActive="page" style="margin-left: 10px;" >Edit</a>
+          <button class="btn btn-danger" style="margin-left: 10px;" (click)="removeProduct(element.id)">Delete</button>
+        </td>
+      </ng-container>
+      
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  

@@ -20,7 +20,7 @@ class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
 
     @action(detail=True, methods=["get"])
-    def full(self, request, pk=None):
+    def full_instance(self, request, pk=None):
         product: Product = Product.objects.get(id=pk)
         serializer = self.get_serializer(product, many=False)
         response_data = serializer.data
@@ -28,6 +28,18 @@ class ProductView(viewsets.ModelViewSet):
             product.category.all(),
             many=True,
         ).data
+        return Response(response_data)
+
+    @action(detail=False, methods=["get"])
+    def full(self, request, pk=None):
+        products: Product = Product.objects.all()
+        serializer = self.get_serializer(products, many=True)
+        response_data = serializer.data
+        for instance in response_data:
+            instance["category"] = CategorySerializer(
+                products.get(id=instance["id"]).category.all(),
+                many=True,
+            ).data
         return Response(response_data)
 
     @action(detail=True, methods=["get"])
@@ -47,7 +59,9 @@ class ProductView(viewsets.ModelViewSet):
                 many=True,
             ).data
 
-        return Response(response_data[:5])
+        return Response(
+            response_data[: 5 if len(response_data) >= 5 else len(response_data)]
+        )
 
 
 @action(detail=False, methods=["get"])

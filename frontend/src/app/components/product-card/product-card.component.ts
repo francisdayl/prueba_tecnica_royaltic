@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ProductFull } from '../../interfaces/store';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-card',

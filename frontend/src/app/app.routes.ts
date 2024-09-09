@@ -9,27 +9,50 @@ import { AdminProductComponent } from './pages/admin-product/admin-product.compo
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { indexResolver } from './resolvers/index.resolver';
 import { productDetailResolver } from './resolvers/product-detail.resolver';
+import { adminProductResolver } from './resolvers/admin-product.resolver';
 
 const resolvedAdminProduct: ResolveFn<string> = () => Promise.resolve('product');
-
+const resolvedAdminProductDetail: ResolveFn<string> = () => Promise.resolve('product/create');
 
 export const routes: Routes = [
-    { path: '',      component: IndexComponent, resolve: { data: indexResolver } },
-    { path: 'admin',   component: AdminComponent,  children: [
-        {
-          path: 'product',
-          title: resolvedAdminProduct,
-          component: AdminProductComponent, 
-        },
-        {
-          path: 'category',
-          component: AdminCategoryComponent, 
-        },
-      ], },
-    { path: 'admin-category/id',      component: AdminCategoryDetailComponent },
-    { path: 'admin-product/id',      component: AdminProductDetailComponent },
-    { path: 'product',      component: AdminProductComponent },
-    { path: 'product/:id',      component: ProductDetailComponent,  resolve: { data: productDetailResolver } },
-    { path: '**',      component: NotFoundComponent }
-
+  { path: '', component: IndexComponent, resolve: { data: indexResolver } },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    children: [
+      {
+        path: 'product',
+        title: resolvedAdminProduct,
+        component: AdminProductComponent,
+        resolve: { data: adminProductResolver }
+      },
+      {
+        path: 'product/create',
+        title: resolvedAdminProductDetail,
+        component: AdminProductDetailComponent
+      },
+      {
+        path: 'product/:id',
+        component: AdminProductDetailComponent
+      },
+      {
+        path: 'category',
+        component: AdminCategoryComponent
+      },
+      {
+        path: 'category/:id',
+        component: AdminCategoryDetailComponent
+      }
+    ]
+  },
+  {
+    path: 'product',
+    component: AdminProductComponent
+  },
+  {
+    path: 'product/:id',
+    component: ProductDetailComponent,
+    resolve: { data: productDetailResolver }
+  },
+  { path: '**', component: NotFoundComponent }
 ];

@@ -13,6 +13,8 @@ export class AdminComponent implements OnInit{
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
+    if(this.router.url==="/admin"){
     this.router.navigate(['product'], { relativeTo: this.activatedRoute });
+    }
   }
 }
