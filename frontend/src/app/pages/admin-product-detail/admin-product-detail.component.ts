@@ -96,7 +96,7 @@ export class AdminProductDetailComponent implements OnInit {
       
 
     } else {
-      console.log('Form is invalid');
+      this.openSnackBar("Formulario Invalido","OK");
       this.markFormGroupTouched(this.productForm);
     }
   }

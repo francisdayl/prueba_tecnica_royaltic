@@ -33,8 +33,6 @@ export class AdminCategoryDetailComponent implements OnInit {
     }
     else{
       this.activatedRoute.data.subscribe(({ data })=>{
-        console.log(data)
-        console.log(data.name)
         this.categoryForm = this.fb.group({
           id: [data.id],
           name: [data.name, Validators.required],

@@ -30,7 +30,6 @@ export class AdminCategoryComponent implements OnInit {
   
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ data })=>{
-      console.log(data)
       this.dataSource = data})
   }
 
