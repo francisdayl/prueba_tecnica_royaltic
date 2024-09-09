@@ -16,7 +16,7 @@ export const adminProductDetailResolver: ResolveFn<ProductFull> = (route, state)
   return storeService.getProductFull(productId);
 };
 
-export const adminProductDetailForm: ResolveFn<Category[]> = (route, state) => {
+export const adminCategoryResolver: ResolveFn<Category[]> = (route, state) => {
   const storeService = inject(StoreService); 
   return storeService.getCategories();
 };

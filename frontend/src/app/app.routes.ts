@@ -9,9 +9,10 @@ import { AdminProductComponent } from './pages/admin-product/admin-product.compo
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { indexResolver } from './resolvers/index.resolver';
 import { productDetailResolver } from './resolvers/product-detail.resolver';
-import { adminProductDetailForm, adminProductResolver, adminProductDetailResolver } from './resolvers/admin-product.resolver';
+import { adminCategoryResolver, adminProductResolver, adminProductDetailResolver } from './resolvers/admin-product.resolver';
 
 const resolvedAdminProduct: ResolveFn<string> = () => Promise.resolve('product');
+const resolvedAdminCategory: ResolveFn<string> = () => Promise.resolve('category');
 const resolvedAdminProductDetail: ResolveFn<string> = () => Promise.resolve('product/create');
 
 export const routes: Routes = [
@@ -30,16 +31,22 @@ export const routes: Routes = [
         path: 'product/create',
         title: resolvedAdminProductDetail,
         component: AdminProductDetailComponent,
-        resolve: { data: adminProductDetailForm }
+        resolve: { data: adminCategoryResolver }
       },
       {
         path: 'product/:id',
         component: AdminProductDetailComponent,
-        resolve: { data: adminProductDetailForm, product: adminProductDetailResolver  }
+        resolve: { data: adminCategoryResolver, product: adminProductDetailResolver  }
       },
       {
         path: 'category',
-        component: AdminCategoryComponent
+        title: resolvedAdminCategory,
+        component: AdminCategoryComponent,
+        resolve: { data: adminCategoryResolver }
+      },
+      {
+        path: 'category/create',
+        component: AdminCategoryDetailComponent
       },
       {
         path: 'category/:id',
