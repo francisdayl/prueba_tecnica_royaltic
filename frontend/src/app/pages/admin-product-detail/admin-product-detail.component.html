@@ -40,11 +40,11 @@
         </div>}
       </div>
       <div class="mb-3">
-      <mat-form-field>
+      <mat-form-field style="width: 300px;">
         <mat-label>Categories</mat-label>
-        <mat-select formControlName="category" multiple>
+        <mat-select formControlName="category" multiple style="width: 300px;">
           @for (category of categoryList; track category) {
-            <mat-option [value]="category.id">{{category.name}}</mat-option>
+            <mat-option style="width: 300px;" [value]="category.id">{{category.name}}</mat-option>
           }
         </mat-select>
       </mat-form-field>

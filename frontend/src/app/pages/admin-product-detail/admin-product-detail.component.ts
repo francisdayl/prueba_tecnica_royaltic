@@ -34,17 +34,31 @@ export class AdminProductDetailComponent implements OnInit {
   constructor(private fb: FormBuilder,private storeService: StoreService,private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-
     this.activatedRoute.data.subscribe(({ data })=>{this.categoryList = data})
-    this.productForm = this.fb.group({
-      id: [null],
-      name: ['', Validators.required],
-      image: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      category: ['',Validators.required]
-    });
 
+    if(this.router.url.endsWith("create")){
+      this.productForm = this.fb.group({
+        id: [null],
+        name: ['', Validators.required],
+        image: ['', Validators.required],
+        description: ['', Validators.required],
+        price: ['', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+        category: ['',Validators.required]
+      });
+    }
+    else{
+      this.activatedRoute.data.subscribe(({ product })=>{
+        this.productForm = this.fb.group({
+          id: [product.id],
+          name: [product.name, Validators.required],
+          image: [product.image, Validators.required],
+          description: [product.description, Validators.required],
+          price: [product.price, [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+          category: [product.category.map((x:Category)=>x.id),Validators.required]
+        });
+      })
+
+    }
   }
   private _snackBar = inject(MatSnackBar);
 
@@ -56,16 +70,30 @@ export class AdminProductDetailComponent implements OnInit {
   onSubmit() {
     if (this.productForm.valid) {
       const product: Product = this.productForm.value;
-      this.storeService.createProduct(product).subscribe({
-        next: () => {
-          this.router.navigate(['admin/product']);
-          this.openSnackBar("Producto Creado Exitosamente","OK");
-        },
-        error: (err) => {
-          this.openSnackBar("Error eliminando Producto","OK");
-  
-        }
-      });
+      if(this.router.url.endsWith("create")){
+        this.storeService.createProduct(product).subscribe({
+          next: () => {
+            this.router.navigate(['admin/product']);
+            this.openSnackBar("Producto Creado Exitosamente","OK");
+          },
+          error: (err) => {
+            this.openSnackBar("Producto no se pudo crear","OK");
+    
+          }
+        });
+      }
+      else{
+        this.storeService.updateProduct(product).subscribe({
+          next: () => {
+            this.router.navigate(['admin/product']);
+            this.openSnackBar("Producto Editado Exitosamente","OK");
+          },
+          error: (err) => {
+            this.openSnackBar("Producto no se pudo editar","OK");
+    
+          }
+        });
+      }
       
 
     } else {
