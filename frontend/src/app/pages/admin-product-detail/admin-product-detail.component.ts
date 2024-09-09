@@ -57,7 +57,6 @@ export class AdminProductDetailComponent implements OnInit {
           category: [product.category.map((x:Category)=>x.id),Validators.required]
         });
       })
-
     }
   }
   private _snackBar = inject(MatSnackBar);

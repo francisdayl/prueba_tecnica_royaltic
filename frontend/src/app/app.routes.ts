@@ -9,11 +9,12 @@ import { AdminProductComponent } from './pages/admin-product/admin-product.compo
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { indexResolver } from './resolvers/index.resolver';
 import { productDetailResolver } from './resolvers/product-detail.resolver';
-import { adminCategoryResolver, adminProductResolver, adminProductDetailResolver } from './resolvers/admin-product.resolver';
+import { adminCategoryResolver, adminProductResolver, adminProductDetailResolver, adminSingleCategoryResolver } from './resolvers/admin-product.resolver';
 
 const resolvedAdminProduct: ResolveFn<string> = () => Promise.resolve('product');
 const resolvedAdminCategory: ResolveFn<string> = () => Promise.resolve('category');
 const resolvedAdminProductDetail: ResolveFn<string> = () => Promise.resolve('product/create');
+const resolvedAdminCategoryDetail: ResolveFn<string> = () => Promise.resolve('category/create');
 
 export const routes: Routes = [
   { path: '', component: IndexComponent, resolve: { data: indexResolver } },
@@ -46,11 +47,13 @@ export const routes: Routes = [
       },
       {
         path: 'category/create',
+        title: resolvedAdminCategoryDetail,
         component: AdminCategoryDetailComponent
       },
       {
         path: 'category/:id',
-        component: AdminCategoryDetailComponent
+        component: AdminCategoryDetailComponent,
+        resolve: {data: adminSingleCategoryResolver}
       }
     ]
   },

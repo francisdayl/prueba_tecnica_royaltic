@@ -21,3 +21,9 @@ export const adminCategoryResolver: ResolveFn<Category[]> = (route, state) => {
   return storeService.getCategories();
 };
 
+export const adminSingleCategoryResolver: ResolveFn<Category> = (route, state) => {
+  const categoryId = route.params['id'];
+  const storeService = inject(StoreService); 
+  return storeService.getCategory(categoryId);
+};
+

@@ -1,1 +1,19 @@
-<p>admin-category-detail works!</p>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Category Form</h2>
+    <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <mat-form-field appearance="fill" class="w-100 mb-3">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+
+            @if(categoryForm.get('name')!.invalid && (categoryForm.get('name')!.dirty || categoryForm.get('name')!.touched)){
+            <mat-error>Name is required</mat-error>
+            }
+        </mat-form-field>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary" [disabled]="!categoryForm.valid">Submit</button>
+    </form>
+</div>

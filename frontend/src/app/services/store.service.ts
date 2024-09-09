@@ -18,7 +18,7 @@ export class StoreService {
     return this.http.get<Category[]>(this.apiUrlCategory);
   }
 
-  getCategory(id:number){
+  getCategory(id:number):Observable<Category>{
     return this.http.get<Category>(`${this.apiUrlCategory}${id}`);
   }
 
