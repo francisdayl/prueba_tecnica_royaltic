@@ -57,7 +57,6 @@ export class IndexComponent implements OnInit {
   }
 
   applySorting(type:string): void {
-    console.log(type);
     const sortField: { [key: string]: keyof Product } = {"1":"name","2":"name","3":"price","4":"price"};
     const sortCriteria = sortField[type];
     if(type=="0"){
