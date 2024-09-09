@@ -1,5 +1,5 @@
 import { ResolveFn } from '@angular/router';
-import { ProductFull } from '../interfaces/store';
+import { Category, ProductFull } from '../interfaces/store';
 import { StoreService } from '../services/store.service';
 import { inject } from '@angular/core';
 
@@ -14,5 +14,10 @@ export const adminProductDetailResolver: ResolveFn<ProductFull> = (route, state)
   const storeService = inject(StoreService); 
 
   return storeService.getProductFull(productId);
+};
+
+export const adminProductDetailForm: ResolveFn<Category[]> = (route, state) => {
+  const storeService = inject(StoreService); 
+  return storeService.getCategories();
 };
 

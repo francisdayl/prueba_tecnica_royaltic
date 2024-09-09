@@ -1,1 +1,56 @@
-<p>admin-product-detail works!</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Product Form</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input id="name" type="text" formControlName="name" class="form-control" required>
+        @if(productForm.get('name')!.invalid && (productForm.get('name')!.dirty || productForm.get('name')!.touched)){
+        <div class="invalid-feedback" >
+          Name is required.
+        </div>}
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image BASE64:</label>
+        <textarea id="image" type="text" formControlName="image" class="form-control" required></textarea>
+        @if(productForm.get('image')!.invalid && (productForm.get('image')!.dirty || productForm.get('image')!.touched)){
+        <div class="invalid-feedback">
+          Image URL is required.
+        </div>}
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea id="description" formControlName="description" class="form-control" rows="3" required></textarea>
+        @if(productForm.get('description')!.invalid && (productForm.get('description')!.dirty || productForm.get('description')!.touched)){
+        <div class="invalid-feedback" >
+          Description is required.
+        </div>}
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price:</label>
+        <div class="input-group">
+          <span class="input-group-text">$</span>
+          <input id="price" type="text" formControlName="price" class="form-control" required pattern="^\d+(\.\d{1,2})?$">
+        </div>
+        @if(productForm.get('price')!.invalid && (productForm.get('price')!.dirty || productForm.get('price')!.touched))
+        {<div class="invalid-feedback">
+          Please enter a valid price (e.g., 10.99).
+        </div>}
+      </div>
+      <div class="mb-3">
+      <mat-form-field>
+        <mat-label>Categories</mat-label>
+        <mat-select formControlName="category" multiple>
+          @for (category of categoryList; track category) {
+            <mat-option [value]="category.id">{{category.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Submit</button>
+    </form>
+  </div>

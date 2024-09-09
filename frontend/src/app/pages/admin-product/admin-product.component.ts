@@ -1,5 +1,4 @@
 import {Component, inject, OnInit, ViewChild, AfterViewInit} from '@angular/core';
-import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import { StoreService } from '../../services/store.service';

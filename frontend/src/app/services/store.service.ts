@@ -51,8 +51,8 @@ export class StoreService {
     return this.http.get<ProductFull[]>(`${this.apiUrlProduct}full`);
   }
 
-  createProduct(category: Product){
-    return this.http.post<Product>(this.apiUrlProduct,category);
+  createProduct(product: Product){
+    return this.http.post<Product>(this.apiUrlProduct,product);
   }
 
   updateProduct(product: Product){
