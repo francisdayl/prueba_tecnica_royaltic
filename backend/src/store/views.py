@@ -54,7 +54,7 @@ class ProductView(viewsets.ModelViewSet):
         serializer = self.get_serializer(common_category_products, many=True)
         response_data = serializer.data
         for instance in response_data:
-            instance["categories"] = CategorySerializer(
+            instance["category"] = CategorySerializer(
                 common_category_products.get(id=instance["id"]).category.all(),
                 many=True,
             ).data

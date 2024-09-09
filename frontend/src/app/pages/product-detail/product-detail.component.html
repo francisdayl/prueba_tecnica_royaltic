@@ -4,6 +4,6 @@
 
 <div class="d-flex flex-row related-products-container w-75 mx-auto overflow-x-scroll py-4 mb-4" id="related-products">
     @for(relatedProduct of relatedProducts; track relatedProduct){
-        <app-product-card [product]="selectedProduct!" [width]="500" [height]="300" (click)="navigateTo(relatedProduct.id)"></app-product-card>
+        <app-product-card [product]="relatedProduct!" [width]="500" [height]="300" (click)="navigateTo(relatedProduct.id)"></app-product-card>
     }
 </div>
