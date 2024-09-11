@@ -10,7 +10,7 @@ export const indexResolver: ResolveFn<{ categories: Category[], products: Produc
   const storeService = inject(StoreService); 
   return forkJoin({
     categories: storeService.getCategories(), 
-    products: storeService.getProducts()      
+    products: storeService.checkAndSeedData()      
   }).pipe(
     map((data: { categories: Category[], products: Product[]}) => ({
       categories: data.categories,
