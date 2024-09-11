@@ -10,10 +10,15 @@ Technical test consisting on a Full Stack application with CRUD operations. It i
 
 ### Frontend
 
+![Index Page](/frontend/public/index_page.png "Index Page")
+
+![Admin Page](/frontend/public/admin_page.png "Admin Page")
+
 Create components, pages, resolvers, routes, services, forms
 For UI: bootstrap, Material Angular and reactive forms.
 
 ### Backend
+![Api Docs](/frontend/public/api_doc.png "Api Docs")
 Create the necessary endpoints for the test. Also there is a seed endpoint for faster testing
 Create api docummentation to directly interact and test the API. (Check: localhost:8000/docs)
 Use of serializers to automatically convert the models into json objects in order to send proper the responses
